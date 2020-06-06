@@ -1,6 +1,7 @@
 digitSum :: Int->Int
 helper :: Int->Int->Int
 
-digitSum n = helper 0 (abs n)
+digitSum n = helper n 0
 
-helper acc n = if(div n 10 == 0) then n + acc else helper (acc + mod n 10) $div n 10
+helper 0 s = s
+helper x s = helper (div x 10) s + (mod x 10)
