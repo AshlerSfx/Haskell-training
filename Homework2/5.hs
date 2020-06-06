@@ -1,10 +1,12 @@
 sumThree :: [Int]->[Int]->[Int]->[Int]
+sumTwo :: [Int]->[Int]->[Int]
 
-sumThree a b c = sumTwo [] c $sumTwo [] a b where
+sumTwo a b = helper a b []
+ 
+helper [] [] list = reverse list
+helper (x : xs) [] list = helper xs [] (x : list)
+helper [] (y : ys) list = helper [] ys (y : list)
+helper (x : xs) (y : ys) list = helper xs ys ((x + y) : list)
 
-    sumTwo :: [Int]->[Int]->[Int]->[Int]
+sumThree xs ys zs = sumTwo xs (sumTwo ys zs) 
 
-    sumTwo newlist [] [] = newlist
-    sumTwo newlist [] b = newlist ++ b
-    sumTwo newlist a [] = newlist ++ a 
-    sumTwo newlist (x:as) (y:bs) = sumTwo (newlist ++ [x + y]) as bs
